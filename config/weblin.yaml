@@ -1,0 +1,32 @@
+# Server Configuration
+server:
+  # Server Listening Port (DEF:8443)
+  port: 8443
+  # TLS Configuration
+  tls:
+    # TLS enabled (DEF:false)
+    enabled: false
+    # TLS Certificate Path (Set when TLS is enabled)
+    tlsCertPath:
+    # TLS Private Key Path (Set when TLS is enabled)
+    tlsKeyPath:
+
+# API Configuration
+api:
+  # Endpoints providing server metrics (DEF:/metrics)
+  metricURI: /metrics
+  # Endpoints for server health checks (DEF:/health)
+  healthURI: /health
+  # Endpoings providing server status information (DEF:/sys/stats)
+  sysStatURI: /sys/stats
+  
+# Log Configuration
+log:
+  # Max log file size (DEF:100MB, MIN:1MB, MAX:1000MB)
+  maxLogFileSize: 100
+  # Max log file backup number (DEF:10, MIN:1, MAX:100)
+  maxLogFileBackup: 10
+  # Max log file age (DEF:90, MIN:1, MAX:365)
+  maxLogFileAge: 90
+  # Compress backup log file (DEF:true)
+  compressBackupLogFile: true
