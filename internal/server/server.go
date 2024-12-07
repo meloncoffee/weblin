@@ -49,6 +49,7 @@ type Server struct{}
 // Parameters:
 //   - ctx: 서버 종료 컨텍스트
 func (s *Server) Run(ctx context.Context) {
+	var tlsConf tls.Config
 	var err error
 	isTLS := false
 	port := config.Conf.Server.Port
@@ -69,7 +70,6 @@ func (s *Server) Run(ctx context.Context) {
 		}
 
 		// TLS 설정
-		tlsConf := &tls.Config{}
 		if tlsConf.NextProtos == nil {
 			// 애플리케이션 계층 프로토콜(HTTP/1.1, HTTP/2) 설정
 			tlsConf.NextProtos = []string{"h2", "http/1.1"}
@@ -102,6 +102,7 @@ func (s *Server) Run(ctx context.Context) {
 
 	// HTTP 서버 가동
 	if isTLS {
+		server.TLSConfig = &tlsConf
 		go func() {
 			err := server.ListenAndServeTLS("", "")
 			if err != nil && err != http.ErrServerClosed {
